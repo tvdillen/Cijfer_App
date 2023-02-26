@@ -1,0 +1,195 @@
+<!--Deze CijferApp is gemaakt door Jelte, Justin en Tim uit 4HE-->
+
+<html>
+    <head>
+        <title>Cijfer App!</title>
+        <link rel="stylesheet" href="cijferApp.css"> 
+    </head>
+    <body onload="showDiv('home')"> 
+        <script>
+            function showDiv(menuOptie){
+                const home = document.getElementById('home');
+                const cijfers = document.getElementById('cijfers');
+                const elo = document.getElementById('elo');
+                const overOns = document.getElementById('overOns');
+
+                if (menuOptie == "home"){
+                    home.style.display = 'block';
+                } else {
+                    home.style.display = 'none';
+                }
+                if (menuOptie == "cijfers"){
+                    cijfers.style.display = 'block';
+                } else {
+                    cijfers.style.display = 'none';
+                }
+                if (menuOptie == "elo"){
+                    elo.style.display = 'block';
+                } else {
+                    elo.style.display = 'none';
+                }
+                if (menuOptie == "overOns"){
+                    overOns.style.display = 'block';
+                } else {
+                    overOns.style.display = 'none';
+                }
+            }
+            function berekenEindCijfer(){
+                // dit stukje JavaScript hebben we samengesteld met behulp van de website
+                // https://www.w3schools.com/jsref/met_document_getelementbyid.asp
+                var PO1_cijfer = parseFloat(document.getElementById('PO1_cijfer').value); 
+                // de querySelector hebben we gevonden op: 
+                // https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button
+                var PO1_weegfactor = parseInt(document.querySelector('input[name="PO1_weegfactor"]:checked').value);
+                var PO2_cijfer = parseFloat(document.getElementById('PO2_cijfer').value);
+                var PO2_weegfactor = parseInt(document.querySelector('input[name="PO2_weegfactor"]:checked').value);
+                var PO3_cijfer = parseFloat(document.getElementById('PO3_cijfer').value);
+                var PO3_weegfactor = parseInt(document.querySelector('input[name="PO3_weegfactor"]:checked').value);
+                var SE1_cijfer = parseFloat(document.getElementById('SE1_cijfer').value);
+                var SE1_weegfactor = parseInt(document.querySelector('input[name="SE1_weegfactor"]:checked').value);
+                var SE2_cijfer = parseFloat(document.getElementById('SE2_cijfer').value);
+                var SE2_weegfactor = parseInt(document.querySelector('input[name="SE2_weegfactor"]:checked').value);
+                var met_weegfactor = document.getElementById('met_weegfactor');
+
+                if (met_weegfactor.checked == true){
+                    //Bereken eerst het totaal aan weegfactor
+                    var totaal_weegfactor = PO1_weegfactor + PO2_weegfactor + PO3_weegfactor + SE1_weegfactor + SE2_weegfactor;
+                    //Bereken alle cijfers maal de weegfactor en tel deze bij elkaar
+                    var tussencijfer = PO1_cijfer * PO1_weegfactor + 
+                                       PO2_cijfer * PO2_weegfactor + 
+                                       PO3_cijfer * PO3_weegfactor + 
+                                       SE1_cijfer * SE1_weegfactor + 
+                                       SE2_cijfer * SE2_weegfactor;
+                    //deel het tussencijfer door het totaal van de weegfactor en geeft het eindcijfer weer
+                    document.getElementById('eindcijfer').value = tussencijfer / totaal_weegfactor;
+                    //Anders is het veld met weegfactor niet aangevinkt dus dan het eindcijfer berekenen door te delen door 5.
+                } else {
+                    var eindcijfer = (PO1_cijfer + PO2_cijfer + PO3_cijfer + SE1_cijfer + SE2_cijfer)/5;
+                    document.getElementById('eindcijfer').value = eindcijfer;
+                }
+
+            }
+
+        </script>
+
+        <!-- Het menu waaruit de gebruiker kan kiezen voor de onderdelen van de App-->
+        <div id="menu" class="menu">
+            <table> 
+                <tr> 
+                    <td><a href="#" onclick="showDiv('home');">Home</a></td>
+                    <td><a href="#" onclick="showDiv('cijfers');">Cijfers</a></td>
+                    <td><a href="#" onclick="showDiv('elo');">ELO</a></td>
+                    <td><a href="#" onclick="showDiv('overOns');">Over ons</a></td>
+                </tr>
+            </table>
+        </div>
+        <!-- De home pagine geeft een korte introductie van de App-->
+        <div id="home" class="contentVlak">
+            <center>
+                <h1>Welkom in de <i>Cijfer App</i> van de Minkema</h1> <br>
+                <img src="Rapport.jpg"> 
+            </center>
+        </div>
+        <!-- Bereken het eindcijfer van een leerling -->
+        <div id="cijfers" class="contentVlak">
+            <h1>Bereken hier het eindcijfer voor een leerling. </h1>
+            <h3>Je kunt zelfs weegfactoren toepassen! :-)</h3>
+            <table>
+                <tr>
+                    <td><b>Toets</b></td>
+                    <td><b>Cijfer</b></td>
+                    <td><b>Weegfactor</b></td>
+                </tr>
+                <tr>
+                    <td>PO1</td>
+                    <td><input id="PO1_cijfer" type="text" style="width: 50px;"></td> 
+                    <td>
+                        <input name="PO1_weegfactor" value="6"type="radio" checked="checked">6
+                        <input name="PO1_weegfactor" value="8" type="radio">8
+                        <input name="PO1_weegfactor" value="10" type="radio">10
+                    </td>
+                </tr>
+                <tr>
+                    <td>PO2</td>
+                    <td><input id="PO2_cijfer" type="text" style="width: 50px;"></td> 
+                    <td>
+                        <input name="PO2_weegfactor" value="6"type="radio" checked="checked">6
+                        <input name="PO2_weegfactor" value="8" type="radio">8
+                        <input name="PO2_weegfactor" value="10" type="radio">10
+                    </td>
+                </tr>
+                <tr>
+                    <td>PO3</td>
+                    <td><input id="PO3_cijfer" type="text" style="width: 50px;"></td> 
+                    <td>
+                        <input name="PO3_weegfactor" value="6"type="radio" checked="checked">6
+                        <input name="PO3_weegfactor" value="8" type="radio">8
+                        <input name="PO3_weegfactor" value="10" type="radio">10
+                    </td>
+                </tr>
+                <tr>
+                    <td>SE1</td>
+                    <td><input id="SE1_cijfer" type="text" style="width: 50px;"></td> 
+                    <td>
+                        <input name="SE1_weegfactor" value="6"type="radio" checked="checked">6
+                        <input name="SE1_weegfactor" value="8" type="radio">8
+                        <input name="SE1_weegfactor" value="10" type="radio">10
+                    </td>
+                </tr>
+                <tr>
+                    <td>SE2</td>
+                    <td><input id="SE2_cijfer" type="text" style="width: 50px;"></td> 
+                    <td>
+                        <input name="SE2_weegfactor" value="6"type="radio" checked="checked">6
+                        <input name="SE2_weegfactor" value="8" type="radio">8
+                        <input name="SE2_weegfactor" value="10" type="radio">10
+                    </td>
+                    <!-- button onclick voorbeeld van https://www.w3schools.com/jsref/event_onclick.asp-->
+                    <td><button onclick="berekenEindCijfer()">Bereken</button></td>
+                    <td><input id="met_weegfactor" type="checkbox">met weegfactor</td>
+                </tr>
+            </table> 
+            <br>
+            Het eindcijfer van deze leerling is: <input id="eindcijfer" type="text" disabled="true" style="width:40px">  
+        </div>
+        
+        <!-- Tips naar leuke leersites-->
+        <div id="elo" class="contentVlak">
+            <h1>Tips en links..</h1>
+            <p> Voor het vak Informatica hebben we een aantal websites gebruikt. We raden je de volgende zeker aan. </p>
+            <p> 
+                <li> 
+                    <b><a href="https://w3schools.com" target="_blank">W3Schools</a></b><br>
+                    Op deze website vind je veel tips om HTML, CSS en JavaScript code te schrijven.
+                </li>
+                <li> 
+                    <b><a href="https://stackoverflow.com/" target="_blank">Stack overflow</a></b><br>
+                    Werkt je code niet zoals verwacht? Op Stack overflow zitten heel veel ervaren mensen. Die kunnen je vast helpen.
+                </li>
+                <li> 
+                    <b><a href="https://google.com/" target="_blank">Google</a></b><br>
+                    Ja, Google mag niet ontbreken. De vraag die je hebt wel goed formuleren en dan weet Google al snel het juiste antwoord te vinden. 
+                </li>
+            </p>
+        </div>
+        <!-- Iets over ons de makers van deze App-->
+        <div id="overOns" class="overOns">
+            <h1>Even voorstellen...</h1>
+            <p>Wij zijn de makers van deze App</p> 
+			<table> 
+				<tr>
+					<td> <img src="IMG_3128.jpg"> </td> 
+					<td> <img src="IMG_3127.jpg"> </td>
+					<td> <img src="supporter.jpg"> </td> 
+				</tr>
+				<tr> 
+					<td> Jelte Schermer </td> 
+					<td> Justin Peek </td>
+					<td> Tim van Dillen </td>
+				</tr> 
+			</table> 
+			<p>Wij zitten in 4 HAVO.<br> Wij zijn 16 jaar oud. <br> Wij hebben deze app met z'n drieën gemaakt voor het vak informatica.
+			
+        </div>
+    </body>
+</html>

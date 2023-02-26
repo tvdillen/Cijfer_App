@@ -1,0 +1,52 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* opmaak van de menu class */ 
+.menu {
+    background-color: cornflowerblue;
+    position: absolute;
+    left: 80px;
+    top: 100px;
+    padding: 10px;
+    vertical-align: bottom;
+}
+
+.menu a:link{
+    color: white;
+    font-size: larger;
+    text-decoration: none;
+}
+
+.menu a:visited{
+    color: white;
+    font-size: larger;
+	font-weight: bold;
+}
+
+.menu table{
+    width: 800;
+    text-align: center;
+}
+
+/* opmaak van alle contentvlakken. 
+   De contentvlakken zijn gekoppeld aan de menuopties 
+   die de gebruikers kunnnen kiezen.*/ 
+
+.contentVlak, .overOns {
+    position: absolute;
+    left: 50px;
+    top: 130px;
+    padding: 10px;
+    vertical-align: bottom;
+    background-color: lightcyan;
+    margin: 50px;
+    height: 650px;
+    width: 750px;
+}
+
+.overOns img{ 
+	width: 100px;
+	height: 75px;
+}
+
